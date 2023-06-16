@@ -1,0 +1,16 @@
+-- CreateTable
+CREATE TABLE "Search" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "artist" TEXT NOT NULL,
+    "paint" TEXT NOT NULL,
+    "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "Audio" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "paint" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "searchId" INTEGER NOT NULL,
+    CONSTRAINT "Audio_searchId_fkey" FOREIGN KEY ("searchId") REFERENCES "Search" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

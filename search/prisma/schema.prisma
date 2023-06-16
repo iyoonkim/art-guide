@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Search {
+  id    Int     @id @default(autoincrement())
+  artist String
+  paint String
+  created_at DateTime @default(now())
+  posts Audio[]  @relation("SeachToAudio")
+}
+
+model Audio {
+  id      Int    @id @default(autoincrement())
+  paint String
+  content String
+  searchId Int
+  search   Search  @relation("SeachToAudio", fields: [searchId], references: [id])
+}
